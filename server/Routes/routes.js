@@ -4,9 +4,14 @@ const userModel = require('../Model/userModel')
 const jwt=require("jsonwebtoken")
 const bcrypt=require("bcrypt")
 const dotenv = require("dotenv");
+const oemSpecsModel = require('../Model/oemSpecsModel')
 dotenv.config();
 
 const saltRounds = 10;
+
+// AUTH Routes
+
+
 router.post('/register', async (req, res) => {
 
     const { name, email, password } = req.body
@@ -56,6 +61,76 @@ router.post('/login', async (req, res) => {
     }
   });
   
+
+
+// Add Car Details
+
+router.post('/add-car', async (req, res) => {
+  try {
+    const { image, make, model, year, listPrice, colors, mileage, power, maxSpeed } = req.body;
+    const car = new oemSpecsModel({
+      image,
+      make,
+      model,
+      year,
+      listPrice,
+      colors,
+      mileage,
+      power,
+      maxSpeed
+    });
+    await car.save();
+    res.status(200).json({ message: 'Car details added successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to add car details' });
+  }
+});
+
+
+// Get All Cars
+
+router.get('/cars', async (req, res) => {
+  try {
+    const cars = await oemSpecsModel.find();
+    res.status(200).json(cars);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to retrieve cars' });
+  }
+});
+
+// Add inventory
+
+router.post('/add-inventory', (req, res) => {
+  const {
+    make,
+    model,
+    year,
+    kmOnOdometer,
+    majorScratches,
+    originalPaint,
+    accidentsReported,
+    previousBuyers,
+    registrationPlace
+  } = req.body;
+
+  const inventoryDetails = {
+    make,
+    model,
+    year,
+    kmOnOdometer,
+    majorScratches,
+    originalPaint,
+    accidentsReported,
+    previousBuyers,
+    registrationPlace
+  };
+
+  marketplaceInventory.push(inventoryDetails);
+  res.status(200).json({ message: 'Inventory details added successfully' });
+});
+
 
 
 
