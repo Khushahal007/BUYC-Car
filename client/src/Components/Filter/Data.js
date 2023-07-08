@@ -89,7 +89,7 @@ const Data = () => {
                     });
                     setCars([...cars, data]);
                     onClose();
-                    window.location.reload();
+                    // window.location.reload();
                 } else {
                     console.error('Error creating car:', data);
                 }
