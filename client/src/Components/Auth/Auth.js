@@ -13,16 +13,18 @@ const Auth = () => {
 
   const toast = useToast();
   const navigate = useNavigate();
+  const use = useNavigate();
 
 
   useEffect(() => {
+    const name = localStorage.getItem('name');
     const email = localStorage.getItem('email');
     const password = localStorage.getItem('password');
 
-    if (email && password) {
-      navigate('/home');
+    if (name && email && password) {
+      use('/home');
     }
-  }, []);
+  }, [navigate]);
 
   const handleSignup = async () => {
     try {
@@ -49,6 +51,9 @@ const Auth = () => {
           duration: 3000,
           isClosable: true,
         });
+        localStorage.setItem('name', name);
+        localStorage.setItem('email', email);
+        localStorage.setItem('password', password);
         setName('');
         setEmail('');
         setPassword('');
@@ -94,7 +99,6 @@ const Auth = () => {
       if (response.ok) {
         localStorage.setItem('email', email);
         localStorage.setItem('password', password);
-  
         toast({
           title: 'Login Successful',
           description: data.message,
