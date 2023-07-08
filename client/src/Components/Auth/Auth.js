@@ -28,7 +28,7 @@ const Auth = () => {
 
   const handleSignup = async () => {
     try {
-      const response = await fetch('http://localhost:4000/api/register', {
+      const response = await fetch('https://server-side-8bnl.onrender.com/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ const Auth = () => {
   const handleLogin = async () => {
     try {
 
-      const response = await fetch('http://localhost:4000/api/login', {
+      const response = await fetch('https://server-side-8bnl.onrender.com/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

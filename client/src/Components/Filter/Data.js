@@ -33,7 +33,7 @@ const Data = () => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch('http://localhost:4000/api/cars');
+            const response = await fetch('https://server-side-8bnl.onrender.com/api/cars');
             const data = await response.json();
             setCars(data);
             setLoading(false);
@@ -75,7 +75,7 @@ const Data = () => {
                 formData.append('power', newCar.power);
                 formData.append('maxSpeed', newCar.maxSpeed);
 
-                const response = await fetch('http://localhost:4000/api/add-car', {
+                const response = await fetch('https://server-side-8bnl.onrender.com/api/add-car', {
                     method: 'POST',
                     body: formData,
                 });
@@ -105,7 +105,7 @@ const Data = () => {
 
     const handleUpdateCar = async () => {
         try {
-          const response = await fetch(`http://localhost:4000/api/cars/${selectedCar._id}`, {
+          const response = await fetch(`https://server-side-8bnl.onrender.com/api/cars/${selectedCar._id}`, {
             method: 'PUT',
             body: JSON.stringify(newCar),
           });
@@ -132,7 +132,7 @@ const Data = () => {
       };
       
     const handleDeleteCar = (id) => {
-        fetch(`http://localhost:4000/api/cars/${id}`, {
+        fetch(`https://server-side-8bnl.onrender.com/api/cars/${id}`, {
             method: 'DELETE',
         })
             .then((response) => response.json())
